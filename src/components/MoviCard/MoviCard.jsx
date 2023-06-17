@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import {
   Img,
   List,
@@ -12,7 +13,7 @@ import {
   MovieInfoTextBold,
   MovieName,
   StyledLink,
-} from './MovieCard.styled';
+} from './MoviCard.styled';
 import { LoadingIndicator } from 'components/SharedLayout/LoadingDots';
 
 const MovieCard = ({ movie }) => {

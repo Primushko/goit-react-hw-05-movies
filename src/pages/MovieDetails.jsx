@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'; // бібліотека для ху
 import { useParams, Outlet, useLocation, Link } from 'react-router-dom'; // бібліотека для роботи з адресою
 import { BsArrowLeftShort } from 'react-icons/bs'; // бібліотека для іконки
 import { fetchMovieById } from '../services/api'; // запит на фільм
-import MovieCard from '../components/MovieCard/MovieCard';
-import { Button, Container } from './MovieDelails.styled';
+import MovieCard from '../components/MoviCard/MoviCard';
 import { LoadingIndicator } from 'components/SharedLayout/LoadingDots';
+import { Button, Container } from './MovieDetails.styled';
 
 const MovieDelails = () => {
   const { movieId } = useParams();
