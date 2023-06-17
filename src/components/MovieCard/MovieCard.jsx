@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {
   Img,
   List,
@@ -81,17 +81,17 @@ const MovieCard = ({ movie }) => {
   );
 };
 
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    release_date: PropTypes.string.isRequired,
-    poster_path: PropTypes.string.isRequired,
-    vote_average: PropTypes.number,
-    overview: PropTypes.string,
-    genres: PropTypes.arrayOf(
-      PropTypes.shape({ name: PropTypes.string.isRequired })
-    ),
-  }).isRequired,
-};
+// MovieCard.propTypes = {
+//   movie: PropTypes.shape({
+//     title: PropTypes.string.isRequired,
+//     release_date: PropTypes.string.isRequired,
+//     poster_path: PropTypes.string.isRequired,
+//     vote_average: PropTypes.number,
+//     overview: PropTypes.string,
+//     genres: PropTypes.arrayOf(
+//       PropTypes.shape({ name: PropTypes.string.isRequired })
+//     ),
+//   }).isRequired,
+// };
 
 export default MovieCard;
