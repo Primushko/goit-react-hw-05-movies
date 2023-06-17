@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom'; // додаємо компонент для рендерингу дочірніх компонентів
-import { LoadingIndicator } from './LoadingDots'; // додаємо індикатор завантаження
-import { StyledHeader, StyledNavLink } from './SharedLayout.styled'; // додаємо стилі
+import { Outlet } from 'react-router-dom';
+import { LoadingIndicator } from './LoadingDots';
+import { StyledHeader, StyledNavLink } from './SharedLayout.styled';
 
 const SharedLayout = () => {
   return (
@@ -12,15 +12,11 @@ const SharedLayout = () => {
           <StyledNavLink to="/movies">Movies</StyledNavLink>
         </nav>
       </StyledHeader>
-
-      {/* відкладення рендерингу дочірніх компонентів, поки не буде завантажено весь код */}
       <Suspense fallback={<LoadingIndicator />}>
-        <Outlet /> {/* рендеринг дочірніх компонентів */}
+        <Outlet />
       </Suspense>
     </>
   );
 };
 
 export default SharedLayout;
-
-// Діма Берестень

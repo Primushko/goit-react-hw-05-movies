@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom'; // додаємо хук для роботи з параметрами URL
-import { toast } from 'react-hot-toast'; // імпортуємо плагін для сповіщень
+import { useSearchParams, useLocation } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import { fetchMovieByName } from '../services/api';
 import SearchMovies from '../components/SearchMovies/SearchMovies';
 import {
@@ -9,30 +9,26 @@ import {
   SectionTitle,
   StyledLink,
   StyledSection,
-} from '../components/MovieList/MovieList.styled'; // імпортуємо стилі
+} from '../components/MovieList/MovieList.styled';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 
-  // додаємо запит на фільм
   useEffect(() => {
-    const query = searchParams.get('query') ?? ''; // щоб не було помилки, якщо query не буде в URL
+    const query = searchParams.get('query') ?? '';
     if (!query) return;
 
-    // додаємо сповіщення про пошук
     const getMovie = async () => {
       try {
         const { results } = await fetchMovieByName(query);
-
-        // додаємо сповіщення, якщо фільмів не знайдено
         if (results.length === 0) {
-          toast.dismiss(); // очищаємо попереднє сповіщення
+          toast.dismiss();
           toast.error('No movies found');
-          setMovies([]); // очищаємо масив фільмів
+          setMovies([]);
         } else {
-          setMovies(results); // записуємо масив фільмів
+          setMovies(results);
         }
       } catch (error) {
         toast.error(error.message);
@@ -40,27 +36,21 @@ const Movies = () => {
       }
     };
 
-    // додаємо запит на фільм
-      getMovie();
+    getMovie();
   }, [searchParams]);
 
-  // додаємо функцію для пошуку фільму
   const handleSubmit = query => {
-    setSearchParams({ query }); // записуємо query в URL
+    setSearchParams({ query });
   };
 
   return (
     <main>
       <StyledSection>
         <SectionTitle>Movies Page</SectionTitle>
-
-        <SearchMovies onSubmit={handleSubmit} /> {/* додаємо компонент для пошуку фільму */}
-
+        <SearchMovies onSubmit={handleSubmit} />
         <List>
           {movies.map(movie => (
             <ListItem key={movie.id}>
-
-              {/* додаємо посилання на сторінку фільму */}
               <StyledLink to={`/movies/${movie.id}`} state={{ from: location }}>
                 {movie.title}
               </StyledLink>
@@ -73,5 +63,3 @@ const Movies = () => {
 };
 
 export default Movies;
-
-// Діма Берестень

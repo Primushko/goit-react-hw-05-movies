@@ -1,18 +1,17 @@
-import { Suspense } from 'react'; // додаємо бібліотеку для lazy
-import { useEffect, useState } from 'react'; // додаємо бібліотеку для хуків
-import { useParams, Outlet, useLocation, Link } from 'react-router-dom'; // додаємо бібліотеку для роботи з адресою
-import { BsArrowLeftShort } from 'react-icons/bs'; // додаємо бібліотеку для іконки
-import { fetchMovieById } from '../services/api'; // додаємо запит на фільм
+import { Suspense } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
+import { BsArrowLeftShort } from 'react-icons/bs';
+import { fetchMovieById } from '../services/api';
 import MovieCard from '../components/MovieCard/MovieCard';
-import { Button, Container } from './MovieDelails.styled';
+import { Button, Container } from './MovieDetails.styled';
 import { LoadingIndicator } from 'components/SharedLayout/LoadingDots';
 
-const MovieDelails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const [selectedMovie, setSelectedMovie] = useState({});
 
-  // додаємо запит на фільм
   useEffect(() => {
     const fetchSelectedMovie = async movieId => {
       try {
@@ -29,8 +28,6 @@ const MovieDelails = () => {
   return (
     <main>
       <Container>
-
-        {/* додаємо кнопку для повернення на попередню сторінку */}
         <Link to={location?.state?.from ?? '/'}>
           <Button type="button">
             <BsArrowLeftShort
@@ -39,10 +36,7 @@ const MovieDelails = () => {
             Go back
           </Button>
         </Link>
-
-        <MovieCard movie={selectedMovie} /> {/* додаємо компонент для відображення фільму */}
-
-        {/* додаємо відкладений рендеринг дочірніх компонентів */}
+        <MovieCard movie={selectedMovie} />
         <Suspense fallback={<LoadingIndicator />}>
           <Outlet />
         </Suspense>
@@ -51,6 +45,4 @@ const MovieDelails = () => {
   );
 };
 
-export default MovieDelails;
-
-// Діма Берестень
+export default MovieDetails;

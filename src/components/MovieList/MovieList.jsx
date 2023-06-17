@@ -5,13 +5,12 @@ import {
   SectionTitle,
   List,
   ListItem,
-} from './MovieList.styled'; // додаємо стилі
+} from './MovieList.styled';
 
 const MovieList = ({ trendingMovies }) => {
   return (
     <StyledSection>
       <SectionTitle>Trending today</SectionTitle>
-
       <List>
         {trendingMovies.map(trendingMovie => (
           <ListItem key={trendingMovie.id}>
@@ -39,5 +38,3 @@ MovieList.propTypes = {
     })
   ).isRequired,
 };
-
-// Діма Берестень

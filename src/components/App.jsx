@@ -1,8 +1,8 @@
-import { Routes, Route, Navigate } from 'react-router-dom'; // додаємо маршрутизацію
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy } from 'react';
-import { Toaster } from 'react-hot-toast'; // додаємо сповіщення
+import { Toaster } from 'react-hot-toast';
 
-const SharedLayout = lazy(() => import('./SharedLayout/SharedLayout')); // додаємо лейаут
+const SharedLayout = lazy(() => import('./SharedLayout/SharedLayout'));
 const Home = lazy(() => import('../pages/Home'));
 const Movies = lazy(() => import('../pages/Movies'));
 const MovieDetails = lazy(() => import('../pages/MovieDetails'));
@@ -16,8 +16,6 @@ export const App = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="movies" element={<Movies />} />
-
-          {/* додаємо динамічний роут */}
           <Route path="movies/:movieId" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
@@ -25,9 +23,7 @@ export const App = () => {
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
-      <Toaster /> {/* додаємо сповіщення */}
+      <Toaster />
     </>
   );
 };
-
-// Діма Берестень

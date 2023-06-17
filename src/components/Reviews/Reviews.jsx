@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // доступ до параметрів поточного URL
+import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from '../../services/api';
 import {
   Author,
@@ -9,13 +9,12 @@ import {
   ReviewList,
   ReviewListItem,
   Wrapper,
-} from './Reviews.styled'; // додаємо стилі
+} from './Reviews.styled';
 
 const Reviews = () => {
-  const { movieId } = useParams(); // додаємо доступ до параметрів поточного URL
-  const [reviews, setReviews] = useState([]); // додаємо стейт для відгуків
+  const { movieId } = useParams();
+  const [reviews, setReviews] = useState([]);
 
-  // додаємо запит на відгуки
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -32,8 +31,6 @@ const Reviews = () => {
   return (
     <Wrapper>
       <ReviewHeader>Reviews</ReviewHeader>
-
-      {/* додаємо перевірку на наявність відгуків */}
       {reviews.length ? (
         <ReviewList className="reviews-container">
           {reviews.map(review => (
@@ -52,5 +49,3 @@ const Reviews = () => {
   );
 };
 export default Reviews;
-
-// Діма Берестень
