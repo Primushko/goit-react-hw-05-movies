@@ -1,17 +1,18 @@
-import { Suspense } from 'react'; // бібліотека для lazy
-import { useEffect, useState } from 'react'; // бібліотека для хуків
-import { useParams, Outlet, useLocation, Link } from 'react-router-dom'; // бібліотека для роботи з адресою
-import { BsArrowLeftShort } from 'react-icons/bs'; // бібліотека для іконки
-import { fetchMovieById } from '../services/api'; // запит на фільм
-import MovieCard from '../components/MoviCard/MoviCard';
+import { Suspense } from 'react'; // додаємо бібліотеку для lazy
+import { useEffect, useState } from 'react'; // додаємо бібліотеку для хуків
+import { useParams, Outlet, useLocation, Link } from 'react-router-dom'; // додаємо бібліотеку для роботи з адресою
+import { BsArrowLeftShort } from 'react-icons/bs'; // додаємо бібліотеку для іконки
+import { fetchMovieById } from '../services/api'; // додаємо запит на фільм
+import MovieCard from '../components/MovieCard/MovieCard';
+import { Button, Container } from './MovieDelails.styled';
 import { LoadingIndicator } from 'components/SharedLayout/LoadingDots';
-import { Button, Container } from './MovieDetails.styled';
 
 const MovieDelails = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const [selectedMovie, setSelectedMovie] = useState({});
 
+  // додаємо запит на фільм
   useEffect(() => {
     const fetchSelectedMovie = async movieId => {
       try {
@@ -28,6 +29,8 @@ const MovieDelails = () => {
   return (
     <main>
       <Container>
+
+        {/* додаємо кнопку для повернення на попередню сторінку */}
         <Link to={location?.state?.from ?? '/'}>
           <Button type="button">
             <BsArrowLeftShort
@@ -36,7 +39,10 @@ const MovieDelails = () => {
             Go back
           </Button>
         </Link>
-        <MovieCard movie={selectedMovie} />{' '}
+
+        <MovieCard movie={selectedMovie} /> {/* додаємо компонент для відображення фільму */}
+
+        {/* додаємо відкладений рендеринг дочірніх компонентів */}
         <Suspense fallback={<LoadingIndicator />}>
           <Outlet />
         </Suspense>
@@ -46,3 +52,5 @@ const MovieDelails = () => {
 };
 
 export default MovieDelails;
+
+// Діма Берестень

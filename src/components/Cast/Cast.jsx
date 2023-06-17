@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchMovieCast } from '../../services/api';
+import { useParams } from 'react-router-dom'; // доступ до параметрів поточного URL
+import { fetchMovieCast } from '../../services/api'; // додаємо запит
 import {
   CastHeader,
   CastInfo,
@@ -9,10 +9,10 @@ import {
   CastName,
   NoCastText,
   Wrapper,
-} from './Cast.styled';
+} from './Cast.styled'; // додаємо стилі
 
 const Cast = () => {
-  const { movieId } = useParams();
+  const { movieId } = useParams(); // додаємо параметр movieId
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
@@ -30,11 +30,15 @@ const Cast = () => {
 
   return (
     <Wrapper>
-      <CastHeader>Cast</CastHeader>
+      <CastHeader>Cast</CastHeader> {/* додаємо заголовок */}
+
+      {/* додаємо перевірку на наявність акторів */}
       {cast.length ? (
         <CastList>
           {cast.map(actor => (
             <CastListItem className="cast-card" key={actor.id}>
+
+              {/* додаємо перевірку на наявність фото */}
               {actor.profile_path ? (
                 <img
                   src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
@@ -46,6 +50,8 @@ const Cast = () => {
                   alt={`${actor.name} profile`}
                 />
               )}
+
+              {/* додаємо інформацію про актора */}
               <CastInfo>
                 <CastName>{actor.name}</CastName>
                 <p>Character: {actor.character}</p>
@@ -55,7 +61,7 @@ const Cast = () => {
         </CastList>
       ) : (
         <NoCastText>
-          Про акторський склад ми поки що не маємо інформації.
+          We don't have any information about the cast yet.
         </NoCastText>
       )}
     </Wrapper>
@@ -63,3 +69,5 @@ const Cast = () => {
 };
 
 export default Cast;
+
+// Діма Берестень

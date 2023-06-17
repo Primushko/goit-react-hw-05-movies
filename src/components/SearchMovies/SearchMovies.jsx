@@ -1,17 +1,22 @@
 import PropTypes from 'prop-types';
-import { toast } from 'react-hot-toast';
-import { Button, Form, Input } from './SearchMovies.styled';
+import { toast } from 'react-hot-toast'; // додаємо бібліотеку для сповіщень
+import { Button, Form, Input } from './SearchMovies.styled'; // додаємо стилі
+
+// додаємо функціонал для пошуку фільмів
 const SearchMovies = ({ onSubmit }) => {
   const handleSubmit = e => {
-    e.preventDefault();
-    const query = e.target.elements.query.value;
+    e.preventDefault(); // відміняємо стандартну поведінку браузера
+
+    const query = e.target.elements.query.value; // додаємо доступ до значення поля пошуку
+
+    // додаємо перевірку на наявність значення в полі пошуку
     if (!query) {
       toast.error('Please enter something');
       return;
     }
 
-    onSubmit(query);
-    e.target.reset();
+    onSubmit(query); // додаємо функціонал для пошуку фільмів
+    e.target.reset(); // очищаємо поле пошуку
   };
 
   return (
@@ -22,6 +27,9 @@ const SearchMovies = ({ onSubmit }) => {
   );
 };
 
+// додаємо перевірку на типи пропсів
 SearchMovies.propTypes = { onSubmit: PropTypes.func.isRequired };
 
 export default SearchMovies;
+
+// Діма Берестень
