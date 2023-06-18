@@ -1,51 +1,53 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieReviews } from '../../services/api';
-import {
-  Author,
-  NoReviewsText,
-  Review,
-  ReviewHeader,
-  ReviewList,
-  ReviewListItem,
-  Wrapper,
-} from './Reviews.styled';
+import { useEffect, useState } from 'react';
+import { fetchReviews } from 'services/TmbdApi';
+import Loader from 'components/Loader/Loader';
+import { List } from './Reviews.styled';
 
 const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const { results } = await fetchMovieReviews(movieId);
-        setReviews(results);
-      } catch (error) {
-        console.log(error);
-      }
+    const fetchReviewsFilms = () => {
+      setLoading(true);
+
+      fetchReviews(movieId)
+        .then(reviews => {
+          setReviews(reviews);
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     };
 
-    fetchReviews();
+    fetchReviewsFilms();
   }, [movieId]);
 
   return (
-    <Wrapper>
-      <ReviewHeader>Reviews</ReviewHeader>
-      {reviews.length ? (
-        <ReviewList className="reviews-container">
-          {reviews.map(review => (
-            <ReviewListItem className="review-card" key={review.id}>
-              <Author>Author: {review.author}</Author>
-              <Review>{review.content}</Review>
-            </ReviewListItem>
-          ))}
-        </ReviewList>
-      ) : (
-        <NoReviewsText>
-          We don't have any reviews for this movie yet.
-        </NoReviewsText>
+    <>
+      {loading && <Loader />}
+      {reviews.length !== 0 && (
+        <div>
+          <List>
+            {reviews.map(review => (
+              <li key={review.id}>
+                <h2>Author: {review.author}</h2>
+                <p>{review.content}</p>
+              </li>
+            ))}
+          </List>
+        </div>
       )}
-    </Wrapper>
+      {reviews.length === 0 && (
+        <div>We don't have any reviews for this movie</div>
+      )}
+    </>
   );
 };
+
 export default Reviews;

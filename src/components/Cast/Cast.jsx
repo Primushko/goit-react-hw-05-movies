@@ -1,65 +1,55 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchMovieCast } from '../../services/api';
-import {
-  CastHeader,
-  CastInfo,
-  CastList,
-  CastListItem,
-  CastName,
-  NoCastText,
-  Wrapper,
-} from './Cast.styled';
+import { useEffect, useState } from 'react';
+import { fetchActors } from 'services/TmbdApi';
+import Loader from 'components/Loader/Loader';
+import { List, Text } from './Cast.styled';
 
 const Cast = () => {
   const { movieId } = useParams();
-  const [cast, setCast] = useState([]);
+  const [actors, setActors] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchCast = async () => {
-      try {
-        const { cast } = await fetchMovieCast(movieId);
-        setCast(cast);
-      } catch (error) {
-        console.log(error);
-      }
+    const onActorsOfMovie = () => {
+      setLoading(true);
+
+      fetchActors(movieId)
+        .then(actors => {
+          setActors(actors);
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     };
 
-    fetchCast();
+    onActorsOfMovie();
   }, [movieId]);
 
   return (
-    <Wrapper>
-      <CastHeader>Cast</CastHeader>
-      {cast.length ? (
-        <CastList>
-          {cast.map(actor => (
-            <CastListItem className="cast-card" key={actor.id}>
-              {actor.profile_path ? (
-                <img
-                  src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-                  alt={`${actor.name} profile`}
-                />
-              ) : (
-                <img
-                  src={`https://via.placeholder.com/200x300?text=No+Image`}
-                  alt={`${actor.name} profile`}
-                />
-              )}
-              <CastInfo>
-                <CastName>{actor.name}</CastName>
-                <p>Character: {actor.character}</p>
-              </CastInfo>
-            </CastListItem>
-          ))}
-        </CastList>
-      ) : (
-        <NoCastText>
-          We don't have any information about the cast yet.
-        </NoCastText>
-      )}
-    </Wrapper>
+    <div>
+      {loading && <Loader />}
+
+      <List>
+        {actors.map(({ id, profile_path, original_name, name, character }) => (
+          <li key={id}>
+            <img
+              width="200px"
+              src={
+                profile_path
+                  ? `https://image.tmdb.org/t/p/w500${profile_path}`
+                  : `https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg`
+              }
+              alt={original_name}
+            />
+            <Text>{name}</Text>
+            <Text>Character: {character}</Text>
+          </li>
+        ))}
+      </List>
+    </div>
   );
 };
-
 export default Cast;
