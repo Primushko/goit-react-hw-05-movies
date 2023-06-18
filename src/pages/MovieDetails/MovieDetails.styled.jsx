@@ -33,7 +33,7 @@ export const LinkInfo = styled(Link)`
   color: #191d1e;
 
   &:hover {
-    color: tomato;
+    color: #3a28fc;
   }
 `;
 
@@ -46,10 +46,10 @@ export const Button = styled.button`
   color: #191d1e;
   font-weight: 600;
   font-size: 20px;
-  border-radius: 4px 8px;
+  border-radius: 8px;
 
   &:hover {
-    color: tomato;
-    border: 3px solid tomato;
+    color: #3a28fc;
+    border: 3px solid #3a28fc;
   }
 `;

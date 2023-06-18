@@ -24,6 +24,6 @@ export const Link = styled(NavLink)`
   color: #191d1e;
 
   &:hover {
-    color: tomato;
+    color: #3a28fc;
   }
 `;
