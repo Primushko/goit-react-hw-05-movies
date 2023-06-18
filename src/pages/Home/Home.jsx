@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EditorList from 'pages/EditorList/EditorList';
-import { fetchTrending } from 'services/TmbdApi';
+import { fetchTrending } from 'services/Api';
 import Loader from 'components/Loader/Loader';
 
 const Home = () => {
@@ -30,7 +30,6 @@ const Home = () => {
     <main>
       <h1>Trending today</h1>
       <EditorList films={films} />
-
       {loading && <Loader />}
     </main>
   );

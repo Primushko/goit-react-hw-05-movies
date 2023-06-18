@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { fetchReviews } from 'services/TmbdApi';
+import { fetchReviews } from 'services/Api';
 import Loader from 'components/Loader/Loader';
 import { List } from './Reviews.styled';
 

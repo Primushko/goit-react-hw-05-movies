@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { fetchActors } from 'services/TmbdApi';
+import { fetchActors } from 'services/Api';
 import Loader from 'components/Loader/Loader';
 import { List, Text } from './Cast.styled';
 

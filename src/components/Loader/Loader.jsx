@@ -1,15 +1,19 @@
-import { BallTriangle } from 'react-loader-spinner';
+import { ProgressBar } from 'react-loader-spinner';
 import { Container } from './Loader.styled';
 
 const Loader = () => {
   return (
     <Container>
-      <BallTriangle
-        height="100"
-        width="100"
-        color="tomato"
-        ariaLabel="loading"
+      <ProgressBar
+        height="80"
+        width="80"
+        ariaLabel="progress-bar-loading"
+        wrapperStyle={{}}
+        wrapperClass="progress-bar-wrapper"
+        borderColor="#f6fa1e"
+        barColor="#3a28fc"
       />
+      ;
     </Container>
   );
 };

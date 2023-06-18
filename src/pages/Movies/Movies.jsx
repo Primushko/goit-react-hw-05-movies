@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Loader from 'components/Loader/Loader';
 import EditorList from 'pages/EditorList/EditorList';
 import Form from 'components/Form/Form';
-import { fetchSearchByKeyword } from 'services/TmbdApi';
+import { fetchSearchByKeyword } from 'services/Api';
 
 const Movies = () => {
   const [searchFilms, setSearchFilms] = useState([]);
