@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
+import { Suspense } from 'react';
 import { fetchMovieDetails } from 'services/Api';
 import Loader from 'components/Loader/Loader';
 import {
@@ -19,7 +20,6 @@ const MovieDetails = () => {
   useEffect(() => {
     const fetchMovieDetailsFilms = () => {
       setLoading(true);
-
       fetchMovieDetails(movieId)
         .then(detailMovie => {
           setMovieInfo(detailMovie);
@@ -31,10 +31,8 @@ const MovieDetails = () => {
           setLoading(false);
         });
     };
-
     fetchMovieDetailsFilms();
   }, [movieId]);
-
   if (!movieInfo) {
     return;
   }
@@ -55,7 +53,6 @@ const MovieDetails = () => {
         <Button type="button">Go back</Button>
       </Link>
       {loading && <Loader />}
-
       {movieInfo && (
         <Container>
           <img
@@ -63,7 +60,7 @@ const MovieDetails = () => {
             src={
               poster_path
                 ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                : `https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg`
+                : `https://via.placeholder.com/200x300?text=No+Image`
             }
             alt={original_title}
           />
@@ -95,7 +92,9 @@ const MovieDetails = () => {
           </li>
         </ListInfo>
         <hr />
-        <Outlet />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
       </div>
     </>
   );
