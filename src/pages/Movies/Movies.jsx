@@ -30,7 +30,7 @@ const Movies = () => {
       <Form searchMovies={searchMovies} />
       {loading && <Loader />}
       {noMoviesText && (
-        <p>There is no movies with this request. Please, try again</p>
+        <p>THERE IS NO MOVIES WITH THIS REQUEST. PLEASE, TRY AGAIN!</p>
       )}
       {searchFilms && <EditorList films={searchFilms} />}
     </main>
