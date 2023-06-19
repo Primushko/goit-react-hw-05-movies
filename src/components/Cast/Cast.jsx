@@ -5,10 +5,18 @@ import Loader from 'components/Loader/Loader';
 import { List, Text } from './Cast.styled';
 
 const Cast = () => {
+  // використовується `useParams()` для отримання параметру`movieId` з URL.
+  // вказує на ідентифікатор фільму, для якого потрібно отримати акторів.
   const { movieId } = useParams();
+  // `actors` буде містити отриманих акторів
   const [actors, setActors] = useState([]);
+  // `loading` вказує, чи відбувається процес завантаження
+  // (true - завантаження, false - завантаження завершено).
   const [loading, setLoading] = useState(false);
 
+  // useEffect - відбувається завантаження акторів,з допомогою `fetchActors` і розміщення результату у стан `actors`.
+  // Якщо виникає помилка, вона виводиться у консоль. Незалежно від успіху або невдачі завантаження акторів,
+  // стан `loading` оновлюється на протилежне значення.
   useEffect(() => {
     const onActorsOfMovie = () => {
       setLoading(true);
@@ -24,14 +32,14 @@ const Cast = () => {
           setLoading(false);
         });
     };
-
+    // при зміні `movieId` всередині ефекту виконується функція `onActorsOfMovie()
+    // яка встановлює `loading` на `true`, щоб показати процес завантаження.
     onActorsOfMovie();
   }, [movieId]);
 
   return (
     <div>
       {loading && <Loader />}
-
       <List>
         {actors.map(({ id, profile_path, original_name, name, character }) => (
           <li key={id}>
@@ -53,3 +61,8 @@ const Cast = () => {
   );
 };
 export default Cast;
+// - `id` - унікальний ідентифікатор актора.
+// - `profile_path` - шлях до зображення актора.
+// - `original_name` - оригінальне ім'я актора.
+// - `name` - ім'я актора.
+// - `character` - персонаж, який актор виконує.
