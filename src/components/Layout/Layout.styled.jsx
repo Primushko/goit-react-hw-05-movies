@@ -10,7 +10,7 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header`
-  border-bottom: solid 1px grey;
+  border-bottom: solid 1.5px #f3e9e9;
   margin-bottom: 20px;
 `;
 

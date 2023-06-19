@@ -29,7 +29,7 @@ export const ListInfo = styled.ul`
 export const LinkInfo = styled(Link)`
   text-decoration: none;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 24px;
   color: #191d1e;
 
   &:hover {
