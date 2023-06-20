@@ -5,6 +5,7 @@ import EditorList from 'pages/EditorList/EditorList';
 import { fetchTrending } from 'services/Api';
 // компонент індикатора завантаження.
 import Loader from 'components/Loader/Loader';
+import { SectionTitle } from './Home.styled';
 
 // стан компонента
 const Home = () => {
@@ -34,7 +35,7 @@ const Home = () => {
   // Відображення компонента
   return (
     <main>
-      <h1>Trending today</h1>
+      <SectionTitle>Trending today</SectionTitle>
       <EditorList films={films} />
       {loading && <Loader />}
     </main>
