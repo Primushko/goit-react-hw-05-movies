@@ -2,7 +2,13 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchActors } from 'services/Api';
 import Loader from 'components/Loader/Loader';
-import { List, Text } from './Cast.styled';
+import {
+  CastList,
+  CastListItem,
+  CastName,
+  Wrapper,
+  CastHeader,
+} from './Cast.styled';
 
 const Cast = () => {
   // використовується `useParams()` для отримання параметру`movieId` з URL.
@@ -38,11 +44,12 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <div>
+    <Wrapper>
       {loading && <Loader />}
-      <List>
+      <CastHeader>The cast of characters</CastHeader>
+      <CastList>
         {actors.map(({ id, profile_path, original_name, name, character }) => (
-          <li key={id}>
+          <CastListItem key={id}>
             <img
               width="200px"
               src={
@@ -52,12 +59,12 @@ const Cast = () => {
               }
               alt={original_name}
             />
-            <Text>{name}</Text>
-            <Text>Character: {character}</Text>
-          </li>
+            <CastName>{name}</CastName>
+            <CastName>Character: {character}</CastName>
+          </CastListItem>
         ))}
-      </List>
-    </div>
+      </CastList>
+    </Wrapper>
   );
 };
 export default Cast;
