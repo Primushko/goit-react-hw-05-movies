@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { Layout } from 'components/Layout/Layout';
 
 // асинхронне завантаження для маршрутів , використовуючи React.lazy() і Suspense.
@@ -28,7 +28,7 @@ const App = () => {
           <Route path="/movies/:movieId/reviews" element={<Reviews />} />
         </Route>
         {/* Маршрут * відображає компонент <Home /> для будь-якого невідповідного шляху. */}
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
   );
